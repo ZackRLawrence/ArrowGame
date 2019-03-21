@@ -49,22 +49,31 @@ public class TerrainGenerator : MonoBehaviour {
 
     public bool run;
 
+    public bool level;
+
     private void Start()
     {
+        width2 = width * 2;
+        height2 = height * 2;
+        terrain = GetComponent<Terrain>();
         if (run == true)
         {
-            width2 = width * 2;
-            height2 = height * 2;
             //for land
             offsetX = Random.Range(0f, 9999f);
             offsetY = Random.Range(0f, 9999f);
-            terrain = GetComponent<Terrain>();
 
             Terrain.activeTerrain.terrainData.treeInstances = new TreeInstance[0];
             terrain.terrainData = GenerateTerrain(terrain.terrainData, GuideImage, mixFraction);
             //GenerateTerrainDetail(terrain.terrainData);
 
             //for texture
+            heightField = new float[width, height];
+            AssignSplatMap2(terrain.terrainData);
+        }
+        else if (level == true)
+        {
+            terrain.terrainData = SmoothTerrain(terrain.terrainData);
+
             heightField = new float[width, height];
             AssignSplatMap2(terrain.terrainData);
         }
@@ -94,6 +103,13 @@ public class TerrainGenerator : MonoBehaviour {
         return terrainData;
     }
 
+    TerrainData SmoothTerrain (TerrainData terrainData)
+    {
+        float[,] heights = smooth(terrainData.GetHeights(0, 0, width2, height2));
+        terrainData.SetHeights(0, 0, heights);
+        return terrainData;
+    }
+
     float[,] GenerateHeights (Texture2D guideTexture, float mixFraction)
     { 
         float[,] heights = new float[width2, height2];
@@ -106,8 +122,10 @@ public class TerrainGenerator : MonoBehaviour {
                 int tempX = x * 2;
                 int tempY = y * 2;
             }
+            //Debug.Log("Height: " + height);
         }
-        for (int oof = 0; oof < 2; oof++)
+
+        for (int oof = 0; oof < 30; oof++)
         {
             for (int x = 1; x < width2 - 1; x++)
             {
@@ -125,10 +143,35 @@ public class TerrainGenerator : MonoBehaviour {
                 }
             }
         }
-        //Debug.Log("Height: " + height);
 
         return heights;
     }
+
+    float[,] smooth(float[,] heights)
+    {
+        for (int oof = 0; oof < 4; oof++)
+        {
+            for (int x = 1; x < width2 - 1; x++)
+            {
+                for (int y = 1; y < height2 - 1; y++)
+                {
+                    float total = 0;
+                    for (int k = 0; k < 9; k++)
+                    {
+                        int newX = x - 1 + (k % 3);
+                        int newY = y - 1 + (int)k / (int)3;
+                        total += heights[newX, newY];
+                    }
+
+                    heights[x, y] = total / 9f;
+                }
+            }
+        }
+
+
+        return heights;
+    }
+
 
     float CalculateHeight (Texture2D guideTex, int x, int y, float mixFraction)
     {
@@ -215,8 +258,8 @@ public class TerrainGenerator : MonoBehaviour {
         }
 
         //Debug.Log("AlphaH: " + terrainData.alphamapHeight);
-        terrainData.SetDetailLayer(0, 0, 0, details0);
-        terrainData.SetDetailLayer(0, 0, 1, details1);
+        //terrainData.SetDetailLayer(1, 1, 1, details0);
+        //terrainData.SetDetailLayer(1, 1, 2, details1);
         terrainData.SetAlphamaps(0, 0, splatmapData);
     }
     

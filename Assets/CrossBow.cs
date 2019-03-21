@@ -10,10 +10,13 @@ public class CrossBow : MonoBehaviour
     Vector3 ArrowSlot;
     Vector3 ArrowScale;
     Quaternion ArrowRotation;
+    AudioSource source;
+    public AudioClip clip;
     bool loaded;
     // Start is called before the first frame update
     void Start()
     {
+        source = GetComponent<AudioSource>();
         originalArrow = GetComponentInChildren<Arrow>();
         Arrow = originalArrow;
         ArrowSlot = Arrow.transform.localPosition;
@@ -39,23 +42,16 @@ public class CrossBow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && loaded == true)
+        if (Input.GetMouseButtonDown(0) && loaded == true && Time.deltaTime > 0)
         {
             Arrow.fireArrow();
             Arrow = null;
             loaded = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            AudioSource.PlayClipAtPoint(clip, transform.position);
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && loaded == false)
+        if (Input.GetMouseButtonDown(1) && loaded == false && Time.deltaTime > 0)
             Reload();
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
     }
 
 }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6170659903186905383}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Launcher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 6170659903665220131}
   m_Layer: 0
   m_Name: Target Launcher
-  m_TagString: Untagged
+  m_TagString: Launcher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 6170659903842066786}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Launcher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 6170659903960172805}
   m_Layer: 0
   m_Name: Cube (3)
-  m_TagString: Untagged
+  m_TagString: Launcher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 6170659904032762188}
   m_Layer: 0
   m_Name: Cylinder (3)
-  m_TagString: Untagged
+  m_TagString: Launcher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -355,8 +355,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6170659904032762162}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.6400003, y: -1.33, z: -0.5700002}
-  m_LocalScale: {x: 0.29999998, y: 1, z: 0.29999998}
+  m_LocalPosition: {x: -1.6400003, y: -19.85, z: -0.5700002}
+  m_LocalScale: {x: 0.29999998, y: 20, z: 0.29999998}
   m_Children: []
   m_Father: {fileID: 6170659903665220156}
   m_RootOrder: 5
@@ -435,7 +435,7 @@ GameObject:
   - component: {fileID: 6170659904076628215}
   m_Layer: 0
   m_Name: Catcher
-  m_TagString: Untagged
+  m_TagString: Launcher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -524,6 +524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad70d45cdffdf254d915aeb951fbbe01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rerotate: 0
 --- !u!1 &6170659904329673070
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,7 +539,7 @@ GameObject:
   - component: {fileID: 6170659904329673064}
   m_Layer: 0
   m_Name: Cylinder (1)
-  m_TagString: Untagged
+  m_TagString: Launcher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -551,8 +552,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6170659904329673070}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.6199999, y: -1.35, z: 0.5700002}
-  m_LocalScale: {x: 0.29999998, y: 1.5, z: 0.29999998}
+  m_LocalPosition: {x: 1.6199999, y: -19.85, z: 0.5700002}
+  m_LocalScale: {x: 0.29999998, y: 20, z: 0.29999998}
   m_Children: []
   m_Father: {fileID: 6170659903665220156}
   m_RootOrder: 3
@@ -630,7 +631,7 @@ GameObject:
   - component: {fileID: 6170659904431170461}
   m_Layer: 0
   m_Name: Cylinder (2)
-  m_TagString: Untagged
+  m_TagString: Launcher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -643,8 +644,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6170659904431170435}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.64, y: -1.33, z: 0.5700002}
-  m_LocalScale: {x: 0.29999998, y: 1, z: 0.29999998}
+  m_LocalPosition: {x: -1.64, y: -19.85, z: 0.5700002}
+  m_LocalScale: {x: 0.29999998, y: 20, z: 0.29999998}
   m_Children: []
   m_Father: {fileID: 6170659903665220156}
   m_RootOrder: 4
@@ -722,7 +723,7 @@ GameObject:
   - component: {fileID: 6170659904610105033}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Launcher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -735,8 +736,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6170659904610105039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.62, y: -1.35, z: -0.57}
-  m_LocalScale: {x: 0.3, y: 1.5, z: 0.3}
+  m_LocalPosition: {x: 1.62, y: -19.85, z: -0.57}
+  m_LocalScale: {x: 0.3, y: 20, z: 0.3}
   m_Children: []
   m_Father: {fileID: 6170659903665220156}
   m_RootOrder: 2
@@ -814,7 +815,7 @@ GameObject:
   - component: {fileID: 6170659905091946028}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Launcher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -902,7 +903,7 @@ GameObject:
   - component: {fileID: 6170659905101380350}
   m_Layer: 0
   m_Name: Direction
-  m_TagString: Untagged
+  m_TagString: Launcher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

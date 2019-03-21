@@ -5,9 +5,12 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     bool unHit;
+    AudioSource source;
+    public AudioClip clip;
     // Start is called before the first frame update
     void Start()
     {
+        source = GetComponent<AudioSource>();
         unHit = true;
     }
 
@@ -17,13 +20,14 @@ public class Target : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void hit()
     {
-        if (collision.transform.tag == "Arrow" && unHit == true)
+        if (unHit == true)
         {
             GetComponentInChildren<Renderer>().material.color = Color.red;
             GameObject.Find("GameManager").GetComponent<GameManager>().targetHit();
             unHit = false;
+            AudioSource.PlayClipAtPoint(clip, transform.position);
         }
     }
 }

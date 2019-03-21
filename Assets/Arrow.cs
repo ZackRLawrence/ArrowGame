@@ -8,20 +8,33 @@ public class Arrow : MonoBehaviour
     public float velocity;
     public float maxVelocity;
     public float minVelocity;
+    AudioSource source;
     Rigidbody rb;
     bool airBorne;
     bool stuck;
+    bool line = true;
     public Gradient lineGradient;
     LineRenderer lineRenderer;
+    GameManager gameManager;
     // Start is called before the first frame update
     private void Start()
     {
+        source = GetComponent<AudioSource>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        line = gameManager.line;
         rb = transform.GetComponent<Rigidbody>();
         rb.isKinematic = true;
         airBorne = false;
         stuck = false;
         Physics.IgnoreLayerCollision(9, 9);
         createLine();
+    }
+
+    int counter = 0;
+    void check()
+    {
+        counter++;
+        if (counter > 60) { line = gameManager.line; counter = 0; }
     }
 
     public void fireArrow()
@@ -34,44 +47,68 @@ public class Arrow : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (airBorne == true)
             transform.forward = rb.velocity;
-        if (stuck == false)
+        if (stuck == false && airBorne == false)
         {
-            if (airBorne == false)
-            {
-                if (Input.GetAxis("Mouse ScrollWheel") > 0)
-                    velocity += .5f;
-                else if (Input.GetAxis("Mouse ScrollWheel") < 0)
-                    velocity -= .5f;
-                velocity = Mathf.Clamp(velocity, minVelocity, maxVelocity);
-                updateLine(transform.position, transform.forward * velocity, Physics.gravity);
-            }
-            else
-                updateLine(transform.position, rb.velocity, Physics.gravity);
+            if (Input.GetAxis("Mouse ScrollWheel") > 0)
+                velocity += .5f;
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0)
+                velocity -= .5f;
+            velocity = Mathf.Clamp(velocity, minVelocity, maxVelocity);
         }
+    }
+
+    void Update()
+    {
+        check();
+        if (line == false && lineRenderer != null)
+            Destroy(lineRenderer);
+        if (line == true && lineRenderer == null)
+            createLine();
+        if (stuck == false && airBorne == true && Time.timeScale > 0 && line)
+                updateLine(transform.position, rb.velocity, Physics.gravity);
+        if (stuck == false && airBorne == false && Time.timeScale > 0 && line)
+            updateLine(transform.position, transform.forward * velocity, Physics.gravity);
     }
     GameObject newParent;
     private void OnCollisionEnter(Collision collision)
     {
+        Collider hitCollider = collision.contacts[0].thisCollider;
         if (collision.transform.tag != "Arrow")
         {
             airBorne = false;
-            //rb.isKinematic = true;
-            Invoke("Stick", 0.0f);
-            stuck = true;
-            newParent = collision.gameObject;
-        }
+            if (collision.transform.tag == "Target")
+                newParent = collision.gameObject;
+            else
+                newParent = null;
+            for (int i = 0; i < collision.contacts.Length; i++)
+            {
+                if (collision.contacts[i].thisCollider.name == "ArrowHead")
+                {
+                    Stick();
+                    if (newParent != null)
+                        newParent.GetComponent<Target>().hit();
+                }
+            }
+            destroyLine();
+        } 
     }
 
     private void Stick()
     {
         //rb.isKinematic = true;
         Destroy(rb);
-        destroyLine();
+        stuck = true;
         transform.parent = newParent.transform;
+        Invoke("destroySelf", 5f);
+    }
+
+    private void destroySelf()
+    {
+        Destroy(gameObject);
     }
 
     void createLine()
@@ -95,6 +132,12 @@ public class Arrow : MonoBehaviour
     public LayerMask mask;
     void updateLine(Vector3 initialPosition, Vector3 initialVelocity, Vector3 gravity)
     {
+        if (line == false)
+        {
+            lineRenderer.positionCount = 1;
+            lineRenderer.SetPosition(0, initialPosition);
+            return;
+        }
         float timeDelta = 0.25f / initialVelocity.magnitude; // for example
 
         Vector3 lastPositon;

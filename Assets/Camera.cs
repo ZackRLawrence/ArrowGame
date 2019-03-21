@@ -19,7 +19,7 @@ public class Camera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Cursor.lockState == CursorLockMode.Locked)
+        if (Cursor.lockState == CursorLockMode.Locked && Time.timeScale > 0)
         {
             var md = new Vector2(Input.GetAxisRaw("Mouse X")/* + Input.GetAxis("HorizontalLook")*/, Input.GetAxisRaw("Mouse Y")/* + Input.GetAxis("VerticalLook")*/);
 

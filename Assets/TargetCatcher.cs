@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TargetCatcher : MonoBehaviour
 {
+    public bool rerotate = false;
+    public bool fixedRot = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,12 @@ public class TargetCatcher : MonoBehaviour
     {
         if (col.gameObject.tag == "Target")
         {
-            transform.parent.GetComponent<TargetLauncher>().Catch(col.gameObject.GetComponent<Target>());
+            if(fixedRot)
+                transform.parent.GetComponent<TargetLauncher>().CatchVer3(col.gameObject.GetComponent<Target>());
+            else if (rerotate)
+                transform.parent.GetComponent<TargetLauncher>().CatchVer2(col.gameObject.GetComponent<Target>());
+            else
+                transform.parent.GetComponent<TargetLauncher>().CatchVer1(col.gameObject.GetComponent<Target>());
         }
     }
 }

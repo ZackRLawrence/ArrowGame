@@ -1,0 +1,28 @@
+Arrows are in fact firable from an in fact rotatable crossbow.
+Arrows will stick to what they hit with the head of the arrow, and targets will 
+be completed if hit by the head of an arrow. I opted for a first person camera, which was
+not my original intention.
+
+There are actually 4 levels set up. All pretty simple as stated but I'm further along
+along here than I expected to be.
+
+Temp art assets galore. I've custom terrains in every level, a cute pastel green and brown
+texturing to them, prototype crossbow, a prototype arrow, and a maybe prototype/maybe final target.
+Honestly I'm quite enjoying the aesthetic I have so far to the point where I'm considering 
+completely keeping it.
+
+Sounds effects are not in as of yet. The sound room on campus was taken tonight so  I instead opted to pull
+ahead on other things, in particular:
+
+The projectile path prediction is actually comepletely finished, meaning I'm very far ahead of
+my predictions for this check in leaving a stretch goal open as a possibility. VR is my first choice.
+
+An unexpected task was implementing a terrain generator I wrote. I've found it to be by far the best option
+for easily creating believable enough landscapes with enough control to design levels.
+
+There were also plenty of fixes required through the process involving physics and arrows resizing when
+sticking to objects. 
+
+Video:
+
+https://www.youtube.com/watch?v=I_6aZbYHvPM&feature=youtu.be
