@@ -139,7 +139,7 @@ public class Arrow : MonoBehaviour
         if (line == false)
         {
             lineRenderer.positionCount = 1;
-            lineRenderer.SetPosition(0, initialPosition);
+            lineRenderer.SetPosition(0, initialPosition - new Vector3(-100, -100, -100));
             return;
         }
         float timeDelta = 0.25f / initialVelocity.magnitude; // for example
