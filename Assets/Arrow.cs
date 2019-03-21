@@ -99,10 +99,14 @@ public class Arrow : MonoBehaviour
 
     private void Stick()
     {
-        //rb.isKinematic = true;
+        rb.isKinematic = true;
         Destroy(rb);
         stuck = true;
-        transform.parent = newParent.transform;
+        if (newParent != null)
+        {
+            transform.parent = newParent.transform;
+            rb.isKinematic = false;
+        }
         Invoke("destroySelf", 5f);
     }
 

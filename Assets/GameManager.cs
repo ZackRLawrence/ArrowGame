@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             Instance = this;
+            Time.fixedDeltaTime = 1 / 90f;
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else if (Instance != this)
